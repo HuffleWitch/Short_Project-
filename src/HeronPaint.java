@@ -16,8 +16,9 @@ public class HeronPaint extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        primaryStage.setTitle("HeronPaint");
         Group root = new Group();
-        Scene s = new Scene(root, 300, 300, Color.BLACK);
+        Scene s = new Scene(root, 300, 300, Color.WHITE);
 
         final Canvas canvas = new Canvas(250,250);
         GraphicsContext gc = canvas.getGraphicsContext2D();
