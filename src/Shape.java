@@ -2,7 +2,7 @@
 
 public abstract class Shape {
 
-    private Canvas canvas;
+    private GraphicsContext gc;
 
     public abstract void draw();
 
