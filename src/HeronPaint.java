@@ -3,11 +3,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
+import javafx.scene.control.*;
+import javafx.geometry.Orientation;
 
 public class HeronPaint extends Application {
     public static void main(String[] args) {
@@ -17,16 +19,47 @@ public class HeronPaint extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("HeronPaint");
-        Group root = new Group();
-        Scene s = new Scene(root, 300, 300, Color.WHITE);
+        BorderPane root = new BorderPane();
+        Scene s = new Scene(root, 500, 500, Color.WHITE);
 
-        final Canvas canvas = new Canvas(250,250);
+        final Canvas canvas = new Canvas();
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gc.setFill(Color.BLUE);
-        gc.fillRect(75,75,100,100);
+        gc.fillRect(-25,75,700,100);
 
-        root.getChildren().add(canvas);
+        HBox toprow = new HBox(
+            new Button("New"),
+            new Button("Open"),
+            new Button("Save"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Clean"),
+            new Button("Compile"),
+            new Button("Run"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Debug"),
+            new Button("Profile")
+        );
+
+        HBox botrow = new HBox(
+            new Button("New"),
+            new Button("Open"),
+            new Button("Save"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Clean"),
+            new Button("Compile"),
+            new Button("Run"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Debug"),
+            new Button("Profile")
+        );
+
+        VBox vbox = new VBox();
+        vbox.getChildren().add(toprow);
+        vbox.getChildren().add(botrow);
+
+        root.setCenter(canvas);
+        root.setTop(vbox);
         primaryStage.setScene(s);
         primaryStage.show();
     }
