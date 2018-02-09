@@ -10,10 +10,18 @@ import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
 import javafx.geometry.Orientation;
+<<<<<<< HEAD
 import javafx.scene.control.ButtonBar;
 import javafx.scene.shape.Rectangle;
+=======
+import java.util.ArrayList;
+
+>>>>>>> 5b0319f2c0cdfabb00b45297f47c9fb4992c1e5d
 
 public class HeronPaint extends Application {
+
+    ArrayList<Shape> shapes = new ArrayList<Shape>();
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -30,6 +38,7 @@ public class HeronPaint extends Application {
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gc.setFill(Color.BLUE);
+<<<<<<< HEAD
         gc.fillRect(0,0,100,100);
 
         // All the color buttons
@@ -138,6 +147,39 @@ public class HeronPaint extends Application {
 
         VBox vbox = new VBox();
         vbox.getChildren().addAll(topButtons, botButtons);
+=======
+        gc.fillRect(-25,75,700,100);
+
+        HBox toprow = new HBox(
+            new Button("New"),
+            new Button("Open"),
+            new Button("Save"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Clean"),
+            new Button("Compile"),
+            new Button("Run"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Debug"),
+            new Button("Profile")
+        );
+
+        HBox botrow = new HBox(
+            new Button("New"),
+            new Button("Open"),
+            new Button("Save"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Clean"),
+            new Button("Compile"),
+            new Button("Run"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Debug"),
+            new Button("Profile")
+        );
+
+        VBox vbox = new VBox();
+        vbox.getChildren().add(toprow);
+        vbox.getChildren().add(botrow);
+>>>>>>> 5b0319f2c0cdfabb00b45297f47c9fb4992c1e5d
 
         root.setCenter(canvas);
         root.setTop(vbox);
