@@ -14,6 +14,7 @@ import javafx.scene.control.ButtonBar;
 import java.util.ArrayList;
 import javafx.scene.shape.Rectangle;
 import javafx.geometry.Pos;
+import javafx.scene.input.MouseEvent;
 
 public class HeronPaint extends Application {
 
@@ -105,8 +106,24 @@ public class HeronPaint extends Application {
         Button loadButton = new Button("LOAD");
         Button printButton = new Button("PRINT");
 
+        
         penButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
+
+                canvas.setOnMousePressed(new EventHandler<MouseEvent>() {
+                    public void handle(MouseEvent event) {
+                        //System.out.println(""+ event.getX()+" "+event.getY());
+                        gc.setFill(color);
+                        gc.fillRect(event.getX(), event.getY(),5,5);
+                    }
+                });
+
+                canvas.setOnMouseDragged(new EventHandler<MouseEvent>() {
+                    public void handle(MouseEvent event) {
+                        //System.out.println(""+ event.getX()+" "+event.getY());
+                        gc.fillRect(event.getX(), event.getY(),5,5);
+                    }
+                });
 
             }
         });
@@ -153,5 +170,6 @@ public class HeronPaint extends Application {
         root.setTop(vbox);
         primaryStage.setScene(s);
         primaryStage.show();
+        penButton.fire();
     }
 }
