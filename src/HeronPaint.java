@@ -39,8 +39,6 @@ public class HeronPaint extends Application {
         final Canvas canvas = new Canvas(1050,800);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        gc.setFill(Color.BLUE);
-        gc.fillRect(0,0,100,100);
 
         // All the color buttons
         Button whiteButton = new Button("", new Rectangle(20, 20, Color.WHITE));
