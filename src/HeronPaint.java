@@ -10,8 +10,11 @@ import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
 import javafx.geometry.Orientation;
+<<<<<<< HEAD
 import java.util.ArrayList;
 
+=======
+>>>>>>> e5e412e533d839f0c0764d78a79c4994eb83f07a
 
 public class HeronPaint extends Application {
 
@@ -32,6 +35,7 @@ public class HeronPaint extends Application {
 
         gc.setFill(Color.BLUE);
         gc.fillRect(-25,75,700,100);
+<<<<<<< HEAD
 
         HBox toprow = new HBox(
             new Button("New"),
@@ -63,6 +67,39 @@ public class HeronPaint extends Application {
         vbox.getChildren().add(toprow);
         vbox.getChildren().add(botrow);
 
+=======
+
+        HBox toolBar = new HBox(
+            new Button("New"),
+            new Button("Open"),
+            new Button("Save"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Clean"),
+            new Button("Compile"),
+            new Button("Run"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Debug"),
+            new Button("Profile")
+        );
+
+        HBox toolBar2 = new HBox(
+            new Button("New2"),
+            new Button("Open"),
+            new Button("Save"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Clean"),
+            new Button("Compile"),
+            new Button("Run"),
+            new Separator(Orientation.VERTICAL),
+            new Button("Debug"),
+            new Button("Profile")
+        );
+
+        VBox vbox = new VBox();
+        vbox.getChildren().add(toolBar);
+        vbox.getChildren().add(toolBar2);
+
+>>>>>>> e5e412e533d839f0c0764d78a79c4994eb83f07a
         root.setCenter(canvas);
         root.setTop(vbox);
         primaryStage.setScene(s);
