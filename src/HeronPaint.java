@@ -26,7 +26,7 @@ public class HeronPaint extends Application {
         BorderPane root = new BorderPane();
         Scene s = new Scene(root, 1050, 800);//, Color.WHITE);
 
-        final Canvas canvas = new Canvas(1000,800);
+        final Canvas canvas = new Canvas(1050,800);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
         gc.setFill(Color.BLUE);
@@ -114,8 +114,8 @@ public class HeronPaint extends Application {
                                     yellowButton,
                                     blueButton,
                                     penButton,
-                                    lineButton,
                                     selectButton,
+                                    lineButton,
                                     polyButton,
                                     textButton,
                                     importButton,
