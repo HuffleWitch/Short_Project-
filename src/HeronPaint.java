@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ButtonBar;
 import java.util.ArrayList;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.*;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 
@@ -24,7 +24,11 @@ public class HeronPaint extends Application {
         launch(args);
     }
 
+    // General color variable
     private Color color = Color.BLACK;
+
+    // Penstroke thicc-ness
+    private double thicc = 1;
 
     @Override
     public void start(Stage primaryStage) {
@@ -89,6 +93,27 @@ public class HeronPaint extends Application {
             }
         });
 
+        // Thickness buttons
+        Button penSize1 = new Button("", new Circle(1,Color.BLACK));
+        Button penSize5 = new Button("", new Circle(2.5,Color.BLACK));
+        Button penSize10 = new Button("", new Circle(5,Color.BLACK));
+
+        penSize1.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                thicc = 1;
+            }
+        });
+        penSize5.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                thicc = 5;
+            }
+        });
+        penSize10.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                thicc = 10;
+            }
+        });
+
         // All the other buttons
         Button penButton = new Button("PEN");
         Button eraseButton = new Button("ERASE");
@@ -114,8 +139,11 @@ public class HeronPaint extends Application {
                 if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
                     gc.setStroke(color);
                     gc.setFill(color);
+                    gc.setLineWidth(thicc);
                     lastX = event.getX();
                     lastY = event.getY();
+                    gc.strokeLine(lastX, lastY, lastX, lastY);
+
                 }
                 if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
                     gc.strokeLine(lastX, lastY, event.getX(), event.getY());
@@ -136,41 +164,48 @@ public class HeronPaint extends Application {
         });
 
         // Setting buttons in bars
+        double spacing = 20;
+        HBox thiccButtons = new HBox(penSize1,
+                                     penSize5,
+                                     penSize10);
+        thiccButtons.setSpacing(spacing);
+        thiccButtons.setAlignment(Pos.CENTER);
+
         HBox topButtons = new HBox();
 
         topButtons.getChildren().addAll(whiteButton,
-                                    redButton,
-                                    yellowButton,
-                                    blueButton,
-                                    penButton,
-                                    selectButton,
-                                    lineButton,
-                                    polyButton,
-                                    textButton,
-                                    importButton,
-                                    saveButton,
-                                    printButton);
-        double spacing = 20;
+                                        redButton,
+                                        yellowButton,
+                                        blueButton,
+                                        penButton,
+                                        selectButton,
+                                        lineButton,
+                                        polyButton,
+                                        textButton,
+                                        importButton,
+                                        saveButton,
+                                        printButton);
+
         topButtons.setSpacing(spacing);
         topButtons.setAlignment(Pos.CENTER);
 
         HBox botButtons = new HBox();
 
         botButtons.getChildren().addAll(blackButton,
-                                     orangeButton,
-                                     greenButton,
-                                     purpleButton,
-                                     eraseButton,
-                                     arcButton,
-                                     rectButton,
-                                     circButton,
-                                     noteButton,
-                                     hideButton,
-                                     loadButton);
+                                        orangeButton,
+                                        greenButton,
+                                        purpleButton,
+                                        eraseButton,
+                                        arcButton,
+                                        rectButton,
+                                        circButton,
+                                        noteButton,
+                                        hideButton,
+                                        loadButton);
         botButtons.setSpacing(spacing);
 
         VBox vbox = new VBox();
-        vbox.getChildren().addAll(topButtons, botButtons);
+        vbox.getChildren().addAll(topButtons, botButtons, thiccButtons);
         botButtons.setAlignment(Pos.CENTER);
 
         root.setCenter(canvas);
