@@ -10,8 +10,13 @@ import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
 import javafx.geometry.Orientation;
+import java.util.ArrayList;
+
 
 public class HeronPaint extends Application {
+
+    ArrayList<Shape> shapes = new ArrayList<Shape>();
+
     public static void main(String[] args) {
         launch(args);
     }
