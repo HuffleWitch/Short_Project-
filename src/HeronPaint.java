@@ -18,11 +18,13 @@ public class HeronPaint extends Application {
         launch(args);
     }
 
+    private Color color = Color.BLACK;
+
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("HeronPaint");
         BorderPane root = new BorderPane();
-        Scene s = new Scene(root, 1000, 800);//, Color.WHITE);
+        Scene s = new Scene(root, 1050, 800);//, Color.WHITE);
 
         final Canvas canvas = new Canvas(1000,800);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -40,10 +42,53 @@ public class HeronPaint extends Application {
         Button greenButton = new Button("", new Rectangle(20, 20, Color.GREEN));
         Button purpleButton = new Button("", new Rectangle(20, 20, Color.PURPLE));
 
+        whiteButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                color = Color.WHITE;
+            }
+        });
+        redButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                color = Color.RED;
+            }
+        });
+        yellowButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                color = Color.YELLOW;
+            }
+        });
+        blueButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                color = Color.BLUE;
+            }
+        });
+        blackButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                color = Color.BLACK;
+            }
+        });
+        orangeButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                color = Color.ORANGE;
+            }
+        });
+        greenButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                color = Color.GREEN;
+            }
+        });
+        purpleButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                color = Color.PURPLE;
+            }
+        });
+
         // All the other buttons
         Button penButton = new Button("PEN");
         Button eraseButton = new Button("ERASE");
         Button selectButton = new Button("SELECT");
+        Button lineButton = new Button("LINE");
+        Button arcButton = new Button("ARC");
         Button rectButton = new Button("RECTANGLE");
         Button circButton = new Button("CIRCLE");
         Button polyButton = new Button("POLYGON");
@@ -55,6 +100,13 @@ public class HeronPaint extends Application {
         Button loadButton = new Button("LOAD");
         Button printButton = new Button("PRINT");
 
+        purpleButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+            }
+        });
+
+        // Setting buttons in bars
         ButtonBar topButtons = new ButtonBar();
 
         topButtons.getButtons().addAll(whiteButton,
@@ -62,6 +114,7 @@ public class HeronPaint extends Application {
                                     yellowButton,
                                     blueButton,
                                     penButton,
+                                    lineButton,
                                     selectButton,
                                     polyButton,
                                     textButton,
@@ -76,6 +129,7 @@ public class HeronPaint extends Application {
                                      greenButton,
                                      purpleButton,
                                      eraseButton,
+                                     arcButton,
                                      rectButton,
                                      circButton,
                                      noteButton,
