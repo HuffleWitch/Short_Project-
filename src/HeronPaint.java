@@ -106,7 +106,7 @@ public class HeronPaint extends Application {
         Button loadButton = new Button("LOAD");
         Button printButton = new Button("PRINT");
 
-        
+
         penButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
 
@@ -114,14 +114,14 @@ public class HeronPaint extends Application {
                     public void handle(MouseEvent event) {
                         //System.out.println(""+ event.getX()+" "+event.getY());
                         gc.setFill(color);
-                        gc.fillRect(event.getX(), event.getY(),5,5);
+                        gc.fillOval(event.getX()-2.5, event.getY()-2.5,5,5);
                     }
                 });
 
                 canvas.setOnMouseDragged(new EventHandler<MouseEvent>() {
                     public void handle(MouseEvent event) {
                         //System.out.println(""+ event.getX()+" "+event.getY());
-                        gc.fillRect(event.getX(), event.getY(),5,5);
+                        gc.fillOval(event.getX()-2.5, event.getY()-2.5,5,5);
                     }
                 });
 
