@@ -113,15 +113,25 @@ public class HeronPaint extends Application {
                 canvas.setOnMousePressed(new EventHandler<MouseEvent>() {
                     public void handle(MouseEvent event) {
                         //System.out.println(""+ event.getX()+" "+event.getY());
+                        gc.setStroke(color);
                         gc.setFill(color);
-                        gc.fillOval(event.getX()-2.5, event.getY()-2.5,5,5);
                     }
                 });
 
                 canvas.setOnMouseDragged(new EventHandler<MouseEvent>() {
+
+                    double lastX = 0;
+                    double lastY = 0;
+
                     public void handle(MouseEvent event) {
                         //System.out.println(""+ event.getX()+" "+event.getY());
-                        gc.fillOval(event.getX()-2.5, event.getY()-2.5,5,5);
+                        //gc.fillOval(event.getX()-2.5, event.getY()-2.5,5,5);
+                        if (lastX != 0 || lastY != 0) {
+                            gc.strokeLine(lastX, lastY, event.getX(), event.getY());
+                        }
+                        lastX = event.getX();
+                        lastY = event.getY();
+
                     }
                 });
 
