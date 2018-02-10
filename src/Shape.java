@@ -10,9 +10,10 @@ public abstract class Shape {
     public Shape(GraphicsContext gcon, Color c) {
         gc = gcon;
         color = c;
+        gc.setStroke(c);
+        gc.setFill(c);
+
     }
 
     public abstract void draw();
-
-    public abstract void undraw();
 }
