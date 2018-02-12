@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=gcon\ c
+comment0.target=Shape(javafx.scene.canvas.GraphicsContext,\ javafx.scene.paint.Color)
+comment1.params=
+comment1.target=void\ draw()
+numComments=2

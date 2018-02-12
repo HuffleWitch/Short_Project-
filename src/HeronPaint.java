@@ -1,3 +1,5 @@
+package src;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +21,7 @@ import javafx.scene.input.MouseEvent;
 public class HeronPaint extends Application {
 
     ArrayList<Shape> shapes = new ArrayList<Shape>();
+    ArrayList<Shape> text = new ArrayList<Shape>();
 
     public static void main(String[] args) {
         launch(args);
@@ -128,6 +131,7 @@ public class HeronPaint extends Application {
         Button saveButton = new Button("SAVE");
         Button loadButton = new Button("LOAD");
         Button printButton = new Button("PRINT");
+        Button exportButton = new Button("EXPORT");
 
         EventHandler<MouseEvent> penHandler =new EventHandler<MouseEvent>() {
             double lastX = 0;
@@ -151,6 +155,40 @@ public class HeronPaint extends Application {
             }
         };
 
+                 Stage stage = new Stage();
+                 Saver saver = new Saver(primaryStage);
+                 Loader loader = new Loader(stage);
+     
+                 ArrayList[] things= new ArrayList[2];
+                 things[0]=shapes;
+                 things[1]=text;
+                 
+         saveButton.setOnAction(new EventHandler<ActionEvent>() {
+             public void handle(ActionEvent event) {
+                 
+                 saver.newSave(things);
+ 
+            }
+        });
+        
+        exportButton.setOnAction(new EventHandler<ActionEvent>() {
+             public void handle(ActionEvent event) {
+                 
+                 saver.saveAs(canvas);
+ 
+            }
+        });
+        
+        HBox importedImage = new HBox();
+        
+        importButton.setOnAction(new EventHandler<ActionEvent>() {
+             public void handle(ActionEvent event) {
+                 
+                 importedImage.getChildren().add(loader.importLoad());
+ 
+            }
+        });
+        
         penButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
 
@@ -199,11 +237,12 @@ public class HeronPaint extends Application {
                                         circButton,
                                         noteButton,
                                         hideButton,
-                                        loadButton);
+                                        loadButton,
+                                        exportButton);
         botButtons.setSpacing(spacing);
 
         VBox vbox = new VBox();
-        vbox.getChildren().addAll(topButtons, botButtons, thiccButtons);
+        vbox.getChildren().addAll(topButtons, botButtons, thiccButtons, importedImage);
         botButtons.setAlignment(Pos.CENTER);
 
         root.setCenter(canvas);

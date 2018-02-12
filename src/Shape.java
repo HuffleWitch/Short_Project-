@@ -1,8 +1,10 @@
+package src;
+
 import javafx.scene.*;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
 
-public abstract class Shape {
+public class Shape {
 
     private GraphicsContext gc;
     private Color color;
@@ -15,5 +17,5 @@ public abstract class Shape {
 
     }
 
-    public abstract void draw();
+    public void draw(){}
 }
