@@ -18,7 +18,7 @@ import javafx.scene.input.MouseEvent;
 
 public class HeronPaint extends Application {
 
-    // Main just launches the app by calling start
+    // Main just launches the app by callibg launch which calls start
     public static void main(String[] args) {
         launch(args);
     }
