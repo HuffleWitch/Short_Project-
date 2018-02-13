@@ -18,11 +18,14 @@ import javafx.scene.input.MouseEvent;
 
 public class HeronPaint extends Application {
 
-    ArrayList<Shape> shapes = new ArrayList<Shape>();
-
+    // Main just launches the app by calling start
     public static void main(String[] args) {
         launch(args);
     }
+
+    // Width and Height of Window/Canvas
+    private int width = 800;
+    private int height = 600;
 
     // General color variable
     private Color color = Color.BLACK;
@@ -30,14 +33,31 @@ public class HeronPaint extends Application {
     // Penstroke thicc-ness
     private double thicc = 1;
 
+    // List of Shapes to draw
+    private ArrayList<Shape> shapes = new ArrayList<Shape>();
+
+    final Canvas canvas = new Canvas(width, height);
+    GraphicsContext gc = canvas.getGraphicsContext2D();
+
+    // Erases everything then redraws everything in shapes list
+    private void refresh() {
+        // I see a canvas and I want to paint it white
+        gc.setFill(Color.WHITE);
+        gc.fillRect(0, 0, width, height);
+
+        // But then I redraw all the stuff in shapes
+        for (Shape s: shapes) {
+            s.draw();
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("HeronPaint");
         BorderPane root = new BorderPane();
-        Scene s = new Scene(root, 1050, 800);//, Color.WHITE);
+        Scene s = new Scene(root, width, height);//, Color.WHITE);
 
-        final Canvas canvas = new Canvas(1050,800);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+
 
 
         // All the color buttons
@@ -129,7 +149,7 @@ public class HeronPaint extends Application {
         Button loadButton = new Button("LOAD");
         Button printButton = new Button("PRINT");
 
-        EventHandler<MouseEvent> penHandler =new EventHandler<MouseEvent>() {
+        EventHandler<MouseEvent> penHandler = new EventHandler<MouseEvent>() {
             double lastX = 0;
             double lastY = 0;
             public void handle(MouseEvent event) {
@@ -157,6 +177,38 @@ public class HeronPaint extends Application {
                 canvas.setOnMousePressed(penHandler);
 
                 canvas.setOnMouseDragged(penHandler);
+
+            }
+        });
+
+        EventHandler<MouseEvent> eraseHandler = new EventHandler<MouseEvent>() {
+            double lastX = 0;
+            double lastY = 0;
+            public void handle(MouseEvent event) {
+                //System.out.println(""+ event.getX()+" "+event.getY());
+                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    gc.setStroke(Color.WHITE);
+                    gc.setFill(Color.WHITE);
+                    gc.setLineWidth(thicc);
+                    lastX = event.getX();
+                    lastY = event.getY();
+                    gc.strokeLine(lastX, lastY, lastX, lastY);
+
+                }
+                if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
+                    gc.strokeLine(lastX, lastY, event.getX(), event.getY());
+                    lastX = event.getX();
+                    lastY = event.getY();
+                }
+            }
+        };
+
+        eraseButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                canvas.setOnMousePressed(eraseHandler);
+
+                canvas.setOnMouseDragged(eraseHandler);
 
             }
         });
@@ -209,6 +261,7 @@ public class HeronPaint extends Application {
         root.setCenter(canvas);
         root.setTop(vbox);
         primaryStage.setScene(s);
+        refresh();
         primaryStage.show();
         penButton.fire();
     }
