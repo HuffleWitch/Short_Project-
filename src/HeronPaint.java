@@ -19,6 +19,7 @@ import javafx.util.Pair;
 import javafx.print.*;
 import javafx.print.Printer;
 import javafx.scene.transform.Scale;
+import javafx.scene.image.*;
 
 public class HeronPaint extends Application {
 
@@ -244,21 +245,28 @@ public class HeronPaint extends Application {
             }
         });
 
-        // Implementing printing!
+        // Implementing printing! (by apeing https://github.com/juneau001/JavaFXExamples/blob/master/src/javafxdraw/JavaFXDrawPrint.java)
         printButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                Printer printer = Printer.getDefaultPrinter();
-                PageLayout pageLayout = printer.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
-                double scaleX = pageLayout.getPrintableWidth() / canvas.getBoundsInParent().getWidth();
-                double scaleY = pageLayout.getPrintableHeight() / canvas.getBoundsInParent().getHeight();
-                canvas.getTransforms().add(new Scale(scaleX, scaleY));
+
+                WritableImage wim = new WritableImage(300, 300);
+                canvas.snapshot(null, wim);
+                ImageView iv = new ImageView();
+                iv.setImage(wim);
+
+                Printer selectedPrinter = Printer.getDefaultPrinter();
+                selectedPrinter.createPageLayout(Paper.A0, PageOrientation.PORTRAIT, Printer.MarginType.EQUAL);
+
                 PrinterJob job = PrinterJob.createPrinterJob();
+                job.setPrinter(selectedPrinter);
                 if (job != null) {
-                    boolean success = job.printPage(canvas);
+                    //job.showPageSetupDialog(primaryStage);
+                    boolean success = job.printPage(iv);
                     if (success) {
                         job.endJob();
                     }
                 }
+
             }
         });
 
