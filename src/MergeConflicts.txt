@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Hello my name is Austin
+=======
+Hello my name is Elan
+>>>>>>> 657ace470794b3987ae411b61e814aac6f3cc594
