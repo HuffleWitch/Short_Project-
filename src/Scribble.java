@@ -29,7 +29,7 @@ public class Scribble implements Shape {
         double y1 = points.get(0).getValue();
         double x2 = points.get(0).getKey();
         double y2 = points.get(0).getKey();
-        for (int i = 1; i < points.size(); i++) {
+        for (int i = 0; i < points.size(); i++) {
             x2 = points.get(i).getKey();
             y2 = points.get(i).getValue();
 
