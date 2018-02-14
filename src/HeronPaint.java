@@ -250,7 +250,7 @@ public class HeronPaint extends Application {
             public void handle(ActionEvent event) {
 
                 Printer selectedPrinter = Printer.getDefaultPrinter();
-                PageLayout pl = selectedPrinter.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.EQUAL);
+                PageLayout pl = selectedPrinter.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
 
                 Double pwidth = pl.getPrintableWidth();
                 Double pheight = pl.getPrintableHeight();
@@ -258,7 +258,7 @@ public class HeronPaint extends Application {
 
                 //SnapShot Settings
                 SnapshotParameters settings = new SnapshotParameters();
-                settings.setTransform(new Scale(0.5,0.5));
+                settings.setTransform(new Scale((pwidth/width), (pwidth/width)));
 
                 canvas.snapshot(settings, wim);
                 ImageView iv = new ImageView();
