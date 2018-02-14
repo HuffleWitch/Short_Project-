@@ -45,13 +45,13 @@ public class HeronPaint extends Application {
 
         // All the color buttons
         Button whiteButton = new Button("", new Rectangle(20, 20, Color.WHITE));
-        Button redButton = new Button("", new Rectangle(20, 20, Color.RED));
-        Button yellowButton = new Button("", new Rectangle(20, 20, Color.YELLOW));
-        Button blueButton = new Button("", new Rectangle(20, 20, Color.BLUE));
-        Button blackButton = new Button("", new Rectangle(20, 20, Color.BLACK));
-        Button orangeButton = new Button("", new Rectangle(20, 20, Color.ORANGE));
-        Button greenButton = new Button("", new Rectangle(20, 20, Color.GREEN));
-        Button purpleButton = new Button("", new Rectangle(20, 20, Color.PURPLE));
+        Button redButton = new Button("", new Rectangle(20, 20, Color.MISTYROSE));
+        Button yellowButton = new Button("", new Rectangle(20, 20, Color.ROSYBROWN));
+        Button blueButton = new Button("", new Rectangle(20, 20, Color.CYAN));
+        Button blackButton = new Button("", new Rectangle(20, 20, Color.CHARTREUSE));
+        Button orangeButton = new Button("", new Rectangle(20, 20, Color.TOMATO));
+        Button greenButton = new Button("", new Rectangle(20, 20, Color.SLATEBLUE));
+        Button purpleButton = new Button("", new Rectangle(20, 20, Color.DARKORCHID));
 
         whiteButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -60,37 +60,37 @@ public class HeronPaint extends Application {
         });
         redButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                color = Color.RED;
+                color = Color.MISTYROSE;
             }
         });
         yellowButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                color = Color.YELLOW;
+                color = Color.ROSYBROWN;
             }
         });
         blueButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                color = Color.BLUE;
+                color = Color.CYAN;
             }
         });
         blackButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                color = Color.BLACK;
+                color = Color.CHARTREUSE;
             }
         });
         orangeButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                color = Color.ORANGE;
+                color = Color.TOMATO;
             }
         });
         greenButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                color = Color.GREEN;
+                color = Color.SLATEBLUE;
             }
         });
         purpleButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
-                color = Color.PURPLE;
+                color = Color.DARKORCHID;
             }
         });
 
