@@ -39,8 +39,10 @@ public class HeronPaint extends Application {
         primaryStage.setTitle("HeronPaint");
         BorderPane root = new BorderPane();
         Scene s = new Scene(root, 1050, 800);//, Color.WHITE);
-
-        final Canvas canvas = new Canvas(1050,800);
+        
+        double canvasWidth = 1050;
+        double canvasHeight =800;
+        final Canvas canvas = new Canvas(canvasWidth,canvasHeight);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
 
@@ -183,7 +185,7 @@ public class HeronPaint extends Application {
         Loader l = new Loader(stage);
         importButton.setOnAction(new EventHandler<ActionEvent>() {
              public void handle(ActionEvent event) {
-                 Image image = l.importLoad();
+                 Image image = l.importLoad(canvasWidth, canvasHeight);
                  gc.drawImage(image, 0, 0);
  
             }

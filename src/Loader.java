@@ -74,10 +74,10 @@ public class Loader
         
     }
     
-    public Image importLoad()
+    public Image importLoad(double width, double height)
     {
         File file = chooseFile(stage);
-        Image image = new Image(file.toURI().toString());
+        Image image = new Image(file.toURI().toString(), width, height, true, false);
         return image;
     }
     
