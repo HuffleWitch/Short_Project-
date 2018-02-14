@@ -18,15 +18,22 @@ import java.util.ArrayList;
 import javafx.scene.shape.*;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Pair;
+import javafx.print.*;
+import javafx.print.Printer;
+import javafx.scene.transform.Scale;
+import javafx.scene.image.*;
 
 public class HeronPaint extends Application {
 
-    ArrayList<Shape> shapes = new ArrayList<Shape>();
-    ArrayList<Shape> text = new ArrayList<Shape>();
-
+    // Main just launches the app by callibg launch which calls start
     public static void main(String[] args) {
         launch(args);
     }
+
+    // Width and Height of Window/Canvas
+    private int width = 800;
+    private int height = 600;
 
     // General color variable
     private Color color = Color.BLACK;
@@ -34,16 +41,32 @@ public class HeronPaint extends Application {
     // Penstroke thicc-ness
     private double thicc = 1;
 
+    // List of Shapes to draw
+    private ArrayList<Shape> shapes = new ArrayList<Shape>();
+
+    final Canvas canvas = new Canvas(width, height);
+    GraphicsContext gc = canvas.getGraphicsContext2D();
+
+    // Erases everything then redraws everything in shapes list
+    private void refresh() {
+        // I see a canvas and I want to paint it white
+        System.out.println("Refreshing!");
+        gc.setFill(Color.WHITE);
+        gc.fillRect(0, 0, width, height);
+
+        // But then I redraw all the stuff in shapes
+        for (Shape s: shapes) {
+            s.draw();
+        }
+    }
+
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("HeronPaint");
         BorderPane root = new BorderPane();
-        Scene s = new Scene(root, 1050, 800);//, Color.WHITE);
-        
-        double canvasWidth = 1050;
-        double canvasHeight =800;
-        final Canvas canvas = new Canvas(canvasWidth,canvasHeight);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        Scene s = new Scene(root, width, height);//, Color.WHITE);
+
+
 
 
         // All the color buttons
@@ -136,24 +159,35 @@ public class HeronPaint extends Application {
         Button printButton = new Button("PRINT");
         Button exportButton = new Button("EXPORT");
 
-        EventHandler<MouseEvent> penHandler =new EventHandler<MouseEvent>() {
+        EventHandler<MouseEvent> penHandler = new EventHandler<MouseEvent>() {
             double lastX = 0;
             double lastY = 0;
+            ArrayList<Pair<Double,Double>> points = new ArrayList<Pair<Double,Double>>();
             public void handle(MouseEvent event) {
                 //System.out.println(""+ event.getX()+" "+event.getY());
                 if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    System.out.println("Mouse Pressed");
                     gc.setStroke(color);
                     gc.setFill(color);
                     gc.setLineWidth(thicc);
                     lastX = event.getX();
                     lastY = event.getY();
                     gc.strokeLine(lastX, lastY, lastX, lastY);
+                    points.add(new Pair<Double,Double>(lastX, lastY));
 
                 }
                 if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
+                    System.out.println("Mouse Dragged");
                     gc.strokeLine(lastX, lastY, event.getX(), event.getY());
                     lastX = event.getX();
                     lastY = event.getY();
+                    points.add(new Pair<Double,Double>(lastX, lastY));
+                }
+                if(event.getEventType() == MouseEvent.MOUSE_RELEASED) {
+                    System.out.println("Mouse Released");
+                    shapes.add(new Scribble(gc, color, thicc, points, false));
+                    refresh();
+                    points = new ArrayList<Pair<Double,Double>>();
                 }
             }
         };
@@ -161,42 +195,121 @@ public class HeronPaint extends Application {
                  Stage stage = new Stage();
                  Saver saver = new Saver(primaryStage);
                  Loader loader = new Loader(stage);
-     
+
                  ArrayList[] things= new ArrayList[2];
                  things[0]=shapes;
                  things[1]=text;
-                 
+
          saveButton.setOnAction(new EventHandler<ActionEvent>() {
              public void handle(ActionEvent event) {
-                 
+
                  saver.newSave(things);
- 
+
             }
         });
-        
+
         exportButton.setOnAction(new EventHandler<ActionEvent>() {
              public void handle(ActionEvent event) {
-                 
+
                  saver.saveAs(canvas);
- 
+
             }
         });
-        
+
         Loader l = new Loader(stage);
         importButton.setOnAction(new EventHandler<ActionEvent>() {
              public void handle(ActionEvent event) {
                  Image image = l.importLoad(canvasWidth, canvasHeight);
                  gc.drawImage(image, 0, 0);
- 
+
             }
         });
-        
+
         penButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
 
                 canvas.setOnMousePressed(penHandler);
 
                 canvas.setOnMouseDragged(penHandler);
+
+                canvas.setOnMouseReleased(penHandler);
+
+            }
+        });
+
+        EventHandler<MouseEvent> eraseHandler = new EventHandler<MouseEvent>() {
+            double lastX = 0;
+            double lastY = 0;
+            ArrayList<Pair<Double,Double>> points = new ArrayList<Pair<Double,Double>>();
+            public void handle(MouseEvent event) {
+                //System.out.println(""+ event.getX()+" "+event.getY());
+                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    System.out.println("Mouse Pressed");
+                    gc.setStroke(Color.WHITE);
+                    gc.setFill(Color.WHITE);
+                    gc.setLineWidth(thicc);
+                    lastX = event.getX();
+                    lastY = event.getY();
+                    gc.strokeLine(lastX, lastY, lastX, lastY);
+                    points.add(new Pair<Double,Double>(lastX, lastY));
+
+                }
+                if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
+                    System.out.println("Mouse Dragged");
+                    gc.strokeLine(lastX, lastY, event.getX(), event.getY());
+                    lastX = event.getX();
+                    lastY = event.getY();
+                    points.add(new Pair<Double,Double>(lastX, lastY));
+                }
+                if(event.getEventType() == MouseEvent.MOUSE_RELEASED) {
+                    System.out.println("Mouse Released");
+                    shapes.add(new Scribble(gc, Color.WHITE, thicc, points, true));
+                    refresh();
+                    points = new ArrayList<Pair<Double,Double>>();
+                }
+            }
+        };
+
+        eraseButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                canvas.setOnMousePressed(eraseHandler);
+
+                canvas.setOnMouseDragged(eraseHandler);
+
+                canvas.setOnMouseReleased(eraseHandler);
+
+            }
+        });
+
+        // Implementing printing! (by apeing https://github.com/juneau001/JavaFXExamples/blob/master/src/javafxdraw/JavaFXDrawPrint.java)
+        printButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                Printer selectedPrinter = Printer.getDefaultPrinter();
+                PageLayout pl = selectedPrinter.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
+
+                Double pwidth = pl.getPrintableWidth();
+                Double pheight = pl.getPrintableHeight();
+                WritableImage wim = new WritableImage(pwidth.intValue(), pheight.intValue());
+
+                //SnapShot Settings
+                SnapshotParameters settings = new SnapshotParameters();
+                settings.setTransform(new Scale((pwidth/width), (pwidth/width)));
+
+                canvas.snapshot(settings, wim);
+                ImageView iv = new ImageView();
+                iv.setImage(wim);
+
+                PrinterJob job = PrinterJob.createPrinterJob();
+                job.setPrinter(selectedPrinter);
+                if (job != null) {
+                    //job.showPageSetupDialog(primaryStage);
+                    boolean success = job.printPage(iv);
+                    if (success) {
+                        job.endJob();
+                    }
+                }
 
             }
         });
@@ -250,6 +363,7 @@ public class HeronPaint extends Application {
         root.setCenter(canvas);
         root.setTop(vbox);
         primaryStage.setScene(s);
+        refresh();
         primaryStage.show();
         penButton.fire();
     }
