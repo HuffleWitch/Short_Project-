@@ -17,6 +17,8 @@ import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
 import javafx.print.*;
+import javafx.print.Printer;
+import javafx.scene.transform.Scale;
 
 public class HeronPaint extends Application {
 
@@ -245,6 +247,11 @@ public class HeronPaint extends Application {
         // Implementing printing!
         printButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
+                Printer printer = Printer.getDefaultPrinter();
+                PageLayout pageLayout = printer.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
+                double scaleX = pageLayout.getPrintableWidth() / canvas.getBoundsInParent().getWidth();
+                double scaleY = pageLayout.getPrintableHeight() / canvas.getBoundsInParent().getHeight();
+                canvas.getTransforms().add(new Scale(scaleX, scaleY));
                 PrinterJob job = PrinterJob.createPrinterJob();
                 if (job != null) {
                     boolean success = job.printPage(canvas);
