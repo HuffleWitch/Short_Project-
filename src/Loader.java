@@ -28,7 +28,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.*;
 import javax.imageio.ImageIO;
 //import javax.json.Json;
 //import javax.json.JsonReader;
@@ -74,20 +74,11 @@ public class Loader
         
     }
     
-    public HBox importLoad()
+    public Image importLoad()
     {
         File file = chooseFile(stage);
-        HBox importImage = new HBox();
-        if(file!=null){
-            
-                ImageView img = new ImageView();
-                Image image = new Image(file.toURI().toString());
-                img.setImage(image);
-                
-                importImage.getChildren().add(img);
-
-        }
-        return importImage;
+        Image image = new Image(file.toURI().toString());
+        return image;
     }
     
     public ArrayList[] load()

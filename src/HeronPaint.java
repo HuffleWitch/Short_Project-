@@ -9,6 +9,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.*;
 import javafx.scene.paint.*;
+import javafx.scene.image.Image;
 import javafx.scene.canvas.*;
 import javafx.scene.control.*;
 import javafx.geometry.Orientation;
@@ -179,12 +180,11 @@ public class HeronPaint extends Application {
             }
         });
         
-        HBox importedImage = new HBox();
-        
+        Loader l = new Loader(stage);
         importButton.setOnAction(new EventHandler<ActionEvent>() {
              public void handle(ActionEvent event) {
-                 
-                 importedImage.getChildren().add(loader.importLoad());
+                 Image image = l.importLoad();
+                 gc.drawImage(image, 0, 0);
  
             }
         });
@@ -242,7 +242,7 @@ public class HeronPaint extends Application {
         botButtons.setSpacing(spacing);
 
         VBox vbox = new VBox();
-        vbox.getChildren().addAll(topButtons, botButtons, thiccButtons, importedImage);
+        vbox.getChildren().addAll(topButtons, botButtons, thiccButtons);
         botButtons.setAlignment(Pos.CENTER);
 
         root.setCenter(canvas);
