@@ -16,6 +16,7 @@ import javafx.scene.shape.*;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
+import javafx.print.*;
 
 public class HeronPaint extends Application {
 
@@ -238,6 +239,19 @@ public class HeronPaint extends Application {
 
                 canvas.setOnMouseReleased(eraseHandler);
 
+            }
+        });
+
+        // Implementing printing!
+        printButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                PrinterJob job = PrinterJob.createPrinterJob();
+                if (job != null) {
+                    boolean success = job.printPage(canvas);
+                    if (success) {
+                        job.endJob();
+                    }
+                }
             }
         });
 
