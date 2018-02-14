@@ -249,13 +249,20 @@ public class HeronPaint extends Application {
         printButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
 
-                WritableImage wim = new WritableImage(300, 300);
-                canvas.snapshot(null, wim);
+                Printer selectedPrinter = Printer.getDefaultPrinter();
+                PageLayout pl = selectedPrinter.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.EQUAL);
+
+                Double pwidth = pl.getPrintableWidth();
+                Double pheight = pl.getPrintableHeight();
+                WritableImage wim = new WritableImage(pwidth.intValue(), pheight.intValue());
+
+                //SnapShot Settings
+                SnapshotParameters settings = new SnapshotParameters();
+                settings.setTransform(new Scale(0.5,0.5));
+
+                canvas.snapshot(settings, wim);
                 ImageView iv = new ImageView();
                 iv.setImage(wim);
-
-                Printer selectedPrinter = Printer.getDefaultPrinter();
-                selectedPrinter.createPageLayout(Paper.A0, PageOrientation.PORTRAIT, Printer.MarginType.EQUAL);
 
                 PrinterJob job = PrinterJob.createPrinterJob();
                 job.setPrinter(selectedPrinter);
