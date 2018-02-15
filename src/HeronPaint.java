@@ -219,7 +219,7 @@ public class HeronPaint extends Application {
         Loader l = new Loader(stage);
         importButton.setOnAction(new EventHandler<ActionEvent>() {
              public void handle(ActionEvent event) {
-                 Image image = l.importLoad(canvasWidth, canvasHeight);
+                 Image image = l.importLoad(width, height);
                  gc.drawImage(image, 0, 0);
 
             }
@@ -282,7 +282,7 @@ public class HeronPaint extends Application {
             }
         });
 
-        // Implementing printing! (by apeing https://github.com/juneau001/JavaFXExamples/blob/master/src/javafxdraw/JavaFXDrawPrint.java)
+        // Implementing printing!
         printButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
 
@@ -310,6 +310,92 @@ public class HeronPaint extends Application {
                         job.endJob();
                     }
                 }
+
+            }
+        });
+
+        // Line Button
+        EventHandler<MouseEvent> lineHandler = new EventHandler<MouseEvent>()
+        {
+            double lastX = 0;
+            double lastY = 0;
+            public void handle(MouseEvent event) {
+                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    gc.setStroke(color);
+                    gc.setFill(color);
+                    gc.setLineWidth(thicc);
+                    lastX = event.getX();
+                    lastY = event.getY();
+                }
+                if(event.getEventType() == MouseEvent.MOUSE_RELEASED) {
+                    System.out.println("Mouse Released");
+                    shapes.add(new Line(gc, color, thicc, lastX, lastY, event.getX(), event.getY()));
+                    refresh();
+                }
+            }
+        };
+
+        lineButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                canvas.setOnMousePressed(lineHandler);
+
+                canvas.setOnMouseDragged(lineHandler);
+
+                canvas.setOnMouseReleased(lineHandler);
+
+            }
+        });
+
+        // Rect Button
+        EventHandler<MouseEvent> rectHandler = new EventHandler<MouseEvent>()
+        {
+            double lastX = 0;
+            double lastY = 0;
+            public void handle(MouseEvent event) {
+                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    gc.setStroke(color);
+                    gc.setFill(color);
+                    gc.setLineWidth(thicc);
+                    lastX = event.getX();
+                    lastY = event.getY();
+                }
+                if (event.getEventType() == MouseEvent.MOUSE_RELEASED)
+                {
+                    double xDiff = lastX - event.getX();
+                    double yDiff = lastY - event.getY();
+                    //4th quad
+                    if(xDiff < 0 && yDiff < 0){
+                        shapes.add(new OurRectangle(gc, color, thicc, lastX, lastY, Math.abs(xDiff), Math.abs(yDiff)));
+                        refresh();
+                    }
+                    //3rd quad
+                    if(xDiff > 0 && yDiff < 0){
+                        shapes.add(new OurRectangle(gc, color, thicc, event.getX(), event.getY() + yDiff, xDiff, Math.abs(yDiff)));
+                        refresh();
+                    }
+                    //2nd quad
+                    if(xDiff > 0 && yDiff > 0){
+                        shapes.add(new OurRectangle(gc, color, thicc, event.getX(), event.getY(), xDiff, yDiff));
+                        refresh();
+                    }
+                    //1st quad
+                    if(xDiff < 0 && yDiff > 0){
+                        shapes.add(new OurRectangle(gc, color, thicc, event.getX() + xDiff, lastY - Math.abs(yDiff), Math.abs(xDiff), yDiff));
+                        refresh();
+                    }
+                }
+            }
+        };
+
+        rectButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                canvas.setOnMousePressed(rectHandler);
+
+                canvas.setOnMouseDragged(rectHandler);
+
+                canvas.setOnMouseReleased(rectHandler);
 
             }
         });
