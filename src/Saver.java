@@ -1,9 +1,8 @@
-package src;
 
 
 /**
-* Saver class newSave() saves an array containing two ArrayLists of objects (shapes and texts) to .json 
-* file allowing the user to specify the new file name and location from within a popup menu - saveAs() 
+* Saver class newSave() saves an array containing two ArrayLists of objects (shapes and texts) to .json
+* file allowing the user to specify the new file name and location from within a popup menu - saveAs()
 * exports a snapshot of the canvas to a filetype selected by the user.
  */
 
@@ -45,7 +44,7 @@ public class Saver
         stage =s;
         filechooser = new FileChooser();
     }
-    
+
     public void oldSave(ArrayList[] objects)
     {
     }
@@ -53,18 +52,18 @@ public class Saver
     public void newSave(ArrayList[] objects)
     {
         //Takes in the ArrayLists(Shapes and text) from Main and saves as An array of ArrayLists that are HeronPaint objects to a JSON file
-        
+
         filechooser.setTitle("Save File");
-        
+
         FileChooser.ExtensionFilter efilter = new FileChooser.ExtensionFilter("JSON","*.json");
         filechooser.getExtensionFilters().add(efilter);
-        
+
         File file = filechooser.showSaveDialog(stage);
-        
+
         Gson gson = new Gson();
-        
+
         String savedObjects = gson.toJson(objects);
-        
+
         try{
             FileWriter writer = new FileWriter(file);
             writer.write(savedObjects);
@@ -72,21 +71,21 @@ public class Saver
         } catch(IOException e){
             e.printStackTrace();
         }
-          
+
     }
-    
+
     public void saveAs(Canvas canvas)
     {
-       
+
        filechooser.setTitle("Save File");
-       
+
        filechooser.getExtensionFilters().addAll(
             new FileChooser.ExtensionFilter("SVG Files(*.SVG)", "*.svg"),
             new FileChooser.ExtensionFilter("JPG Files(*.JPG)","*.jpg"),
             new FileChooser.ExtensionFilter("PNG Files(*PNG)","*.png"));
-        
+
         File file = filechooser.showSaveDialog(stage);
-        
+
         if(file!=null){
             String fileName=file.getName();
             String fileExt = "";
@@ -106,9 +105,8 @@ public class Saver
             }
         }
     }
-    
+
     public void rename(File file){
-        
+
     }
 }
-

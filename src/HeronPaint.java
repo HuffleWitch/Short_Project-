@@ -293,7 +293,7 @@ public class HeronPaint extends Application {
                 Double pheight = pl.getPrintableHeight();
                 WritableImage wim = new WritableImage(pwidth.intValue(), pheight.intValue());
 
-                //SnapShot Settings
+                // SnapShot Settings
                 SnapshotParameters settings = new SnapshotParameters();
                 settings.setTransform(new Scale((pwidth/width), (pwidth/width)));
 

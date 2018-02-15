@@ -1,4 +1,3 @@
-package src;
 
  /**
 * Loader class loads a stage from a .json file selected by the user from a popup menu
@@ -44,43 +43,43 @@ public class Loader
     FileChooser filechooser;
     Stage stage;
     Desktop desktop = Desktop.getDesktop();
-    
+
     public Loader(Stage s)
     {
         filechooser = new FileChooser();
         stage =s;
     }
- 
+
     private File chooseFile(Stage stage)
     {
         filechooser.setTitle("Open File");
         File file =filechooser.showOpenDialog(stage);
         return file;
     }
-    
+
     private ArrayList[] convert(File file)
     {
         Gson gson = new Gson();
         ArrayList[] output = new ArrayList[2];
         ArrayList<Shape> shapes = new ArrayList<Shape>();
         ArrayList<Shape> text = new ArrayList<Shape>();
-        
-        
+
+
         System.out.println(output);
-        
+
         //output[0]=shapes;
         //output[1]=text;
         return output;
-        
+
     }
-    
+
     public Image importLoad(double width, double height)
     {
         File file = chooseFile(stage);
         Image image = new Image(file.toURI().toString(), width, height, true, false);
         return image;
     }
-    
+
     public ArrayList[] load()
     {
         File file = this.chooseFile(stage);
