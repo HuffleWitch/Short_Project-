@@ -191,6 +191,7 @@ public class HeronPaint extends Application {
         ImageView oval = new ImageView();
         oval.setImage(ovalIcon);
         Button ovalButton = new Button("", oval);
+        ovalButton.setTooltip(new Tooltip("Oval"));
         
         Image rectIcon = new Image("RectangleIcon.png", 20, 20, true, false);
         ImageView rect = new ImageView();
@@ -211,9 +212,9 @@ public class HeronPaint extends Application {
         polyButton.setTooltip(new Tooltip("Polygon"));
         
         Image textIcon = new Image("TextIcon.png", 20, 20, true, false);
-        ImageView text = new ImageView();
-        text.setImage(textIcon);
-        Button textButton = new Button("", text);
+        ImageView textI = new ImageView();
+        textI.setImage(textIcon);
+        Button textButton = new Button("", textI);
         textButton.setTooltip(new Tooltip("Text"));
         
         Image noteIcon = new Image("NoteIcon.png", 20, 20, true, false);
