@@ -31,4 +31,3 @@ public class Line implements Shape
         gc.strokeLine(x1,y1,x2,y2);
     }
 }
-

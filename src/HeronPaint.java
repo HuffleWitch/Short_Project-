@@ -1,4 +1,4 @@
- 
+
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -15,7 +15,8 @@ import javafx.scene.control.*;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ButtonBar;
 import java.util.ArrayList;
-import javafx.scene.shape.*;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
@@ -24,7 +25,6 @@ import javafx.print.Printer;
 import javafx.scene.transform.Scale;
 import javafx.scene.image.*;
 import javafx.scene.control.Tooltip;
-
 import java.lang.Class;
 
 
@@ -180,67 +180,67 @@ public class HeronPaint extends Application {
         Curse.setImage(CursorIcon);
         Button selectButton = new Button("", Curse);
         selectButton.setTooltip(new Tooltip("Select"));
-        
+
         Image lineIcon = new Image("LineIcon.png", 20, 20, true, false);
         ImageView line = new ImageView();
         line.setImage(lineIcon);
         Button lineButton = new Button("", line);
         lineButton.setTooltip(new Tooltip("Line"));
-        
+
         Image ovalIcon = new Image("OvalIcon.png", 20, 20, true, false);
         ImageView oval = new ImageView();
         oval.setImage(ovalIcon);
         Button ovalButton = new Button("", oval);
         ovalButton.setTooltip(new Tooltip("Oval"));
-        
+
         Image rectIcon = new Image("RectangleIcon.png", 20, 20, true, false);
         ImageView rect = new ImageView();
         rect.setImage(rectIcon);
         Button rectButton = new Button("", rect);
         rectButton.setTooltip(new Tooltip("Rectangle"));
-        
+
         Image circleIcon = new Image("CircleIcon.png", 20, 20, true, false);
         ImageView circ = new ImageView();
         circ.setImage(circleIcon);
         Button circButton = new Button("", circ);
         circButton.setTooltip(new Tooltip("Circle"));
-        
+
         Image polyIcon = new Image("PolygonIcon.png", 20, 20, true, false);
         ImageView poly = new ImageView();
         poly.setImage(polyIcon);
         Button polyButton = new Button("", poly);
         polyButton.setTooltip(new Tooltip("Polygon"));
-        
+
         Image textIcon = new Image("TextIcon.png", 20, 20, true, false);
         ImageView textI = new ImageView();
         textI.setImage(textIcon);
         Button textButton = new Button("", textI);
         textButton.setTooltip(new Tooltip("Text"));
-        
+
         Image noteIcon = new Image("NoteIcon.png", 20, 20, true, false);
         ImageView note = new ImageView();
         note.setImage(noteIcon);
         Button noteButton = new Button("", note);
         noteButton.setTooltip(new Tooltip("Note"));
-        
+
         Image hideIcon = new Image("HideIcon.png", 20, 20, true, false);
         ImageView hide = new ImageView();
         hide.setImage(hideIcon);
         Button hideButton = new Button("", hide);
         hideButton.setTooltip(new Tooltip("Hide Notes"));
-        
+
         Image importIcon = new Image("ImportIcon.png", 20, 20, true, false);
         ImageView imp = new ImageView();
         imp.setImage(importIcon);
         Button importButton = new Button("", imp);
         importButton.setTooltip(new Tooltip("Import"));
-        
+
         Image saveIcon = new Image("SaveIcon.png", 20, 20, true, false);
         ImageView save = new ImageView();
         save.setImage(saveIcon);
         Button saveButton = new Button("", save);
         saveButton.setTooltip(new Tooltip("Save"));
-        
+
         Image loadIcon = new Image("LoadIcon.png", 20, 20, true, false);
         ImageView load = new ImageView();
         load.setImage(loadIcon);
@@ -252,7 +252,7 @@ public class HeronPaint extends Application {
         img.setImage(printicon);
         Button printButton = new Button("", img);
         printButton.setTooltip(new Tooltip("Print"));
-        
+
         Image exportIcon = new Image("ExportIcon.png", 20, 20, true, false);
         ImageView exp = new ImageView();
         exp.setImage(exportIcon);
@@ -488,6 +488,19 @@ public class HeronPaint extends Application {
             }
         };
 
+        rectButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                canvas.setOnMousePressed(rectHandler);
+
+                canvas.setOnMouseDragged(rectHandler);
+
+                canvas.setOnMouseReleased(rectHandler);
+
+            }
+        });
+
+        // Circ button
         EventHandler<MouseEvent> circHandler = new EventHandler<MouseEvent>(){
             double lastX = 0;
             double lastY = 0;
@@ -507,6 +520,7 @@ public class HeronPaint extends Application {
             }
         };
 
+        // Oval button
         EventHandler<MouseEvent> ovalHandler = new EventHandler<MouseEvent>(){
             double lastX = 0;
             double lastY = 0;
@@ -526,6 +540,7 @@ public class HeronPaint extends Application {
             }
         };
 
+        // note button
         EventHandler<MouseEvent> noteHandler = new EventHandler<MouseEvent>(){
             double lastX = 0;
             double lastY = 0;
@@ -545,9 +560,6 @@ public class HeronPaint extends Application {
                 }
             }
         };
-
-
-
 
 
         circButton.setOnAction(new EventHandler<ActionEvent>(){
@@ -583,18 +595,77 @@ public class HeronPaint extends Application {
             }
         });
 
-        rectButton.setOnAction(new EventHandler<ActionEvent>() {
+        // Polygon button
+        EventHandler<MouseEvent> polyHandler = new EventHandler<MouseEvent>()
+        {
+            double originX = 0;
+            double originY = 0;
+            ArrayList<Double> xList = new ArrayList<Double>();
+            ArrayList<Double> yList = new ArrayList<Double>();
+            double lastX = 0;
+            double lastY = 0;
+            int counter = 0;
+            int radius = 20;
+            public void handle(MouseEvent event) {
+                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    if (counter == 0){
+                        originX = event.getX();
+                        originY = event.getY();
+                        lastX = event.getX();
+                        lastY = event.getY();
+                        counter++;
+                        gc.setStroke(color);
+                        gc.setFill(color);
+                        gc.setLineWidth(1);
+                        gc.strokeOval(originX - radius/2, originY - radius/2, radius, radius);
+                        gc.setLineWidth(thicc);
+                    }
+                    if (counter >= 1){
+                        xList.add(event.getX());
+                        yList.add(event.getY());
+                        counter++;
+                        gc.strokeLine(lastX, lastY, event.getX(), event.getY());
+                        lastX = event.getX();
+                        lastY = event.getY();
+                    }
+                }
+
+                if(event.getEventType() == MouseEvent.MOUSE_RELEASED) {
+                    if (originX - radius < event.getX() && event.getX() < originX + radius &&
+                        originY - radius < event.getY() && event.getY() < radius + originY && counter > 2){
+                        double[] aXList = new double[counter];
+                        double[] aYList = new double[counter];
+                        xList.remove(counter - 2);
+                        yList.remove(counter - 2);
+                        for(int i = 0; i < xList.size(); i++){
+                            aXList[i] = (double)xList.get(i);
+                            aYList[i] = (double)yList.get(i);
+                        }
+                        shapes.add(new Polygon(gc, color, thicc, aXList, aYList, xList.size()));
+                        refresh();
+                        originX = 0;
+                        originY = 0;
+                        xList = new ArrayList<Double>();
+                        yList = new ArrayList<Double>();
+                        lastX = 0;
+                        lastY = 0;
+                        counter = 0;
+                    }
+                }
+            }
+        };
+
+        polyButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
 
-                canvas.setOnMousePressed(rectHandler);
+                canvas.setOnMousePressed(polyHandler);
 
-                canvas.setOnMouseDragged(rectHandler);
+                canvas.setOnMouseDragged(polyHandler);
 
-                canvas.setOnMouseReleased(rectHandler);
+                canvas.setOnMouseReleased(polyHandler);
 
             }
         });
-
 
         // Setting buttons in bars
         double spacing = 20;

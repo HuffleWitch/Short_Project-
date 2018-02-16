@@ -16,7 +16,7 @@ public class Text implements Shape {
 
     public Text(GraphicsContext gcon, Color c, double xVal, double yVal, String text){
         gc = gcon;
-        color = c;        
+        color = c;
         x = xVal;
         y = yVal;
         t = text;
