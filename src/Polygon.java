@@ -29,12 +29,12 @@ public class Polygon implements Shape
         gc.strokePolygon(xPoints, yPoints, nPoints);
     }
     public boolean isInHitBox(double x, double y){
-        if(xPoints[0] - 20 < x && x < xPoints[0] + 20 && yPoints[0] - 20 < y && y < 20 + yPoints[0]){
-            return true;
+        for (int i = 0; i < nPoints; i++) {
+            if(xPoints[i] - 20 < x && x < xPoints[i] + 20 && yPoints[i] - 20 < y && y < 20 + yPoints[i]){
+                return true;
+            }
         }
-        else{
-            return false;
-        }
+        return false;
     }
     public void move(double deltaX, double deltaY){
         for(int i = 0; i < nPoints; i++){
