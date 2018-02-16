@@ -1,4 +1,4 @@
- 
+
 import javafx.scene.*;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
@@ -43,6 +43,13 @@ public class Oval implements Shape {
         else{
             gc.strokeOval(x1,y1,w,h);
         }
+
+    }
+
+    public boolean isInHitBox(double isX, double isY) {
+        return false;
+    }
+    public void move(double deltaX, double deltaY){
         
     }
 

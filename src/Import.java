@@ -23,4 +23,11 @@ public class Import implements Shape {
         Image im = new Image(loc);
         gc.drawImage(im,x,y);
     }
+
+    public boolean isInHitBox(double isX, double isY) {
+        return false;
+    }
+    public void move(double deltaX, double deltaY){
+
+    }
 }
