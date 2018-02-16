@@ -55,7 +55,7 @@ public class HeronPaint extends Application {
     // Erases everything then redraws everything in shapes list
     private void refresh() {
         // I see a canvas and I want to paint it white
-        System.out.println("Refreshing!");
+        //System.out.println("Refreshing!");
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, width, height);
 
@@ -266,7 +266,7 @@ public class HeronPaint extends Application {
             public void handle(MouseEvent event) {
                 //System.out.println(""+ event.getX()+" "+event.getY());
                 if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
-                    System.out.println("Mouse Pressed");
+                    //System.out.println("Mouse Pressed");
                     gc.setStroke(color);
                     gc.setFill(color);
                     gc.setLineWidth(thicc);
@@ -277,14 +277,14 @@ public class HeronPaint extends Application {
 
                 }
                 if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
-                    System.out.println("Mouse Dragged");
+                    //System.out.println("Mouse Dragged");
                     gc.strokeLine(lastX, lastY, event.getX(), event.getY());
                     lastX = event.getX();
                     lastY = event.getY();
                     points.add(new Pair<Double,Double>(lastX, lastY));
                 }
                 if(event.getEventType() == MouseEvent.MOUSE_RELEASED) {
-                    System.out.println("Mouse Released");
+                    //System.out.println("Mouse Released");
                     shapes.add(new Scribble(gc, color, thicc, points, false));
                     refresh();
                     points = new ArrayList<Pair<Double,Double>>();
@@ -344,7 +344,7 @@ public class HeronPaint extends Application {
             public void handle(MouseEvent event) {
                 //System.out.println(""+ event.getX()+" "+event.getY());
                 if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
-                    System.out.println("Mouse Pressed");
+                    //System.out.println("Mouse Pressed");
                     gc.setStroke(Color.WHITE);
                     gc.setFill(Color.WHITE);
                     gc.setLineWidth(thicc);
@@ -355,14 +355,14 @@ public class HeronPaint extends Application {
 
                 }
                 if (event.getEventType() == MouseEvent.MOUSE_DRAGGED) {
-                    System.out.println("Mouse Dragged");
+                    //System.out.println("Mouse Dragged");
                     gc.strokeLine(lastX, lastY, event.getX(), event.getY());
                     lastX = event.getX();
                     lastY = event.getY();
                     points.add(new Pair<Double,Double>(lastX, lastY));
                 }
                 if(event.getEventType() == MouseEvent.MOUSE_RELEASED) {
-                    System.out.println("Mouse Released");
+                    //System.out.println("Mouse Released");
                     shapes.add(new Scribble(gc, Color.WHITE, thicc, points, true));
                     refresh();
                     points = new ArrayList<Pair<Double,Double>>();
