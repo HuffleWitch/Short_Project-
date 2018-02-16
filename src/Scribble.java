@@ -45,4 +45,21 @@ public class Scribble implements Shape {
     public boolean isEraseMark() {
         return isErase;
     }
+    public boolean isInHitBox(double isX, double isY) {
+        for (int i = 0; i < points.size(); i++) {
+            //if(points.get(i).getKey() == isX && points.get(i).getValue() == isY){
+            if(points.get(i).getKey() - 10 < isX && isX < 10 + points.get(i).getKey()
+            && points.get(i).getValue() - 10 < isY && isY < 10 + points.get(i).getValue()){
+                return true;
+            }
+        }
+        return false;
+    }
+    public void move(double deltaX, double deltaY){
+        for (int i = 0; i < points.size(); i++) {
+            double newx = points.get(i).getKey() + deltaX;
+            double newy = points.get(i).getValue() + deltaY;
+            points.set(i, new Pair<Double,Double>(newx, newy));
+        }
+    }
 }

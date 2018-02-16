@@ -28,4 +28,18 @@ public class Polygon implements Shape
         gc.setLineWidth(thicc);
         gc.strokePolygon(xPoints, yPoints, nPoints);
     }
+    public boolean isInHitBox(double x, double y){
+        if(xPoints[0] - 20 < x && x < xPoints[0] + 20 && yPoints[0] - 20 < y && y < 20 + yPoints[0]){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public void move(double deltaX, double deltaY){
+        for(int i = 0; i < nPoints; i++){
+            xPoints[i] += deltaX;
+            yPoints[i] += deltaY;
+        }
+    }
 }

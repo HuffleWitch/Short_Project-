@@ -30,8 +30,18 @@ public class OurRectangle implements Shape
         gc.setLineWidth(thicc);
         gc.strokeRect(x, y, width, height);
     }
-    public void scale() {
-        
+    public boolean isInHitBox(double isX, double isY) {
+        double centerX = x + width/2;
+        double centerY = y + height/2;
+        if(centerX - width/2 < isX && isX < width/2 + centerX && centerY - height/2 < isY && isY < height/2 + centerY){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public void move(double deltaX, double deltaY){
+        x += deltaX;
+        y += deltaY;
     }
 }
-
