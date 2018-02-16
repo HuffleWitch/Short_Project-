@@ -449,7 +449,26 @@ public class HeronPaint extends Application {
         };
         
         
-        
+        EventHandler<MouseEvent> importHandler = new EventHandler<MouseEvent>(){
+            double lastX = 0;
+            double lastY = 0;
+            
+            public void handle(MouseEvent event) {
+                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    gc.setStroke(color);
+                    gc.setFill(color);
+                    gc.setLineWidth(thicc);
+                    lastX = event.getX();
+                    lastY = event.getY();
+                }
+                if (event.getEventType() == MouseEvent.MOUSE_RELEASED){
+                    //String address = get address some how from user
+                    //shapes.add(new Import(gc, lastX, lastY, address));
+                    refresh();
+                    
+                }
+            }
+        };
         
         
         
@@ -507,6 +526,18 @@ public class HeronPaint extends Application {
                 canvas.setOnMouseDragged(rectHandler);
 
                 canvas.setOnMouseReleased(rectHandler);
+
+            }
+        });
+        
+        importButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                canvas.setOnMousePressed(importHandler);
+
+                canvas.setOnMouseDragged(importHandler);
+
+                canvas.setOnMouseReleased(importHandler);
 
             }
         });
