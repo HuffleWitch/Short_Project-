@@ -1,3 +1,5 @@
+package src;
+
 
  /**
 * Loader class loads a stage from a .json file selected by the user from a popup menu

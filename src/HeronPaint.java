@@ -23,6 +23,10 @@ import javafx.print.*;
 import javafx.print.Printer;
 import javafx.scene.transform.Scale;
 import javafx.scene.image.*;
+import javafx.scene.control.Tooltip;
+
+import java.lang.Class;
+
 
 public class HeronPaint extends Application {
 
@@ -43,6 +47,7 @@ public class HeronPaint extends Application {
 
     // List of Shapes to draw
     private ArrayList<Shape> shapes = new ArrayList<Shape>();
+    private ArrayList<Shape> text = new ArrayList<Shape>();
 
     final Canvas canvas = new Canvas(width, height);
     GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -67,17 +72,27 @@ public class HeronPaint extends Application {
         Scene s = new Scene(root, width, height);//, Color.WHITE);
 
 
-
+        
 
         // All the color buttons
         Button whiteButton = new Button("", new Rectangle(20, 20, Color.WHITE));
+        whiteButton.setTooltip(new Tooltip("White"));
         Button redButton = new Button("", new Rectangle(20, 20, Color.MISTYROSE));
+        redButton.setTooltip(new Tooltip("Misty Rose"));
         Button yellowButton = new Button("", new Rectangle(20, 20, Color.ROSYBROWN));
+        yellowButton.setTooltip(new Tooltip("Rosy Brown"));
         Button blueButton = new Button("", new Rectangle(20, 20, Color.CYAN));
+        blueButton.setTooltip(new Tooltip("Cyan"));
         Button blackButton = new Button("", new Rectangle(20, 20, Color.CHARTREUSE));
+        blackButton.setTooltip(new Tooltip("Chartreuse"));
         Button orangeButton = new Button("", new Rectangle(20, 20, Color.TOMATO));
+        orangeButton.setTooltip(new Tooltip("Tomato"));
         Button greenButton = new Button("", new Rectangle(20, 20, Color.SLATEBLUE));
+        greenButton.setTooltip(new Tooltip("Slate Blue"));
         Button purpleButton = new Button("", new Rectangle(20, 20, Color.DARKORCHID));
+        purpleButton.setTooltip(new Tooltip("Dark Orchid"));
+        
+        
 
         whiteButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -122,8 +137,11 @@ public class HeronPaint extends Application {
 
         // Thickness buttons
         Button penSize1 = new Button("", new Circle(1,Color.BLACK));
+        penSize1.setTooltip(new Tooltip("Pen Small"));
         Button penSize5 = new Button("", new Circle(2.5,Color.BLACK));
+        penSize5.setTooltip(new Tooltip("Pen Medium"));
         Button penSize10 = new Button("", new Circle(5,Color.BLACK));
+        penSize10.setTooltip(new Tooltip("Pen Big"));
 
         penSize1.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -140,24 +158,58 @@ public class HeronPaint extends Application {
                 thicc = 10;
             }
         });
+        //Button Images
+        
 
         // All the other buttons
-        Button penButton = new Button("PEN");
-        Button eraseButton = new Button("ERASE");
-        Button selectButton = new Button("SELECT");
+
+        Image penIcon = new Image("PenIcon.jpg", 20, 20, true, false);
+        ImageView penImg = new ImageView();
+        penImg.setImage(penIcon);
+        Button penButton = new Button("", penImg);
+        penButton.setTooltip(new Tooltip("Pen"));
+        
+        Image eraserIcon = new Image("EraserIcon.png", 20, 20, true, false);
+        ImageView eraser = new ImageView();
+        eraser.setImage(eraserIcon);
+        Button eraseButton = new Button("", eraser);
+        eraseButton.setTooltip(new Tooltip("Erase"));
+
+        Image CursorIcon = new Image("CursorIcon.png", 20, 20, true, false);
+        ImageView Curse = new ImageView();
+        Curse.setImage(CursorIcon);
+        Button selectButton = new Button("", Curse);
+        selectButton.setTooltip(new Tooltip("Select"));
         Button lineButton = new Button("LINE");
+        lineButton.setTooltip(new Tooltip("Line"));
         Button arcButton = new Button("ARC");
+        arcButton.setTooltip(new Tooltip("Arc"));
         Button rectButton = new Button("RECTANGLE");
+        rectButton.setTooltip(new Tooltip("Rectangle"));
         Button circButton = new Button("CIRCLE");
+        circButton.setTooltip(new Tooltip("Circle"));
         Button polyButton = new Button("POLYGON");
+        polyButton.setTooltip(new Tooltip("Polygon"));
         Button textButton = new Button("TEXT");
+        textButton.setTooltip(new Tooltip("Text"));
         Button noteButton = new Button("NOTE");
+        noteButton.setTooltip(new Tooltip("Note"));
         Button hideButton = new Button("HIDE NOTES");
+        hideButton.setTooltip(new Tooltip("Hide Notes"));
         Button importButton = new Button("IMPORT");
+        importButton.setTooltip(new Tooltip("Import"));
         Button saveButton = new Button("SAVE");
+        saveButton.setTooltip(new Tooltip("Save"));
         Button loadButton = new Button("LOAD");
-        Button printButton = new Button("PRINT");
+        loadButton.setTooltip(new Tooltip("Load"));
+
+        Image printicon = new Image("PrinterIcon.png", 20, 20, true, false);
+        ImageView img = new ImageView();
+        img.setImage(printicon);
+        Button printButton = new Button("", img);
+        printButton.setTooltip(new Tooltip("Print"));
         Button exportButton = new Button("EXPORT");
+        exportButton.setTooltip(new Tooltip("Export"));
 
         EventHandler<MouseEvent> penHandler = new EventHandler<MouseEvent>() {
             double lastX = 0;
