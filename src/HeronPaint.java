@@ -43,7 +43,7 @@ public class HeronPaint extends Application {
 
     // List of Shapes to draw
     private ArrayList<Shape> shapes = new ArrayList<Shape>();
-    private ArrayList<Shape> text = new ArrayList<Shape>();
+    private ArrayList<Text> text = new ArrayList<Text>();
 
     final Canvas canvas = new Canvas(width, height);
     GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -58,6 +58,9 @@ public class HeronPaint extends Application {
         // But then I redraw all the stuff in shapes
         for (Shape s: shapes) {
             s.draw();
+        }
+        for (Text t:text){
+            t.draw();
         }
     }
 
@@ -408,6 +411,24 @@ public class HeronPaint extends Application {
             }
         };
         
+        EventHandler<MouseEvent> noteHandler = new EventHandler<MouseEvent>(){
+            double lastX = 0;
+            double lastY = 0;
+            public void handle(MouseEvent event) {
+                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    gc.setStroke(color);
+                    gc.setFill(color);
+                    gc.setLineWidth(thicc);
+                    lastX = event.getX();
+                    lastY = event.getY();
+                }
+                if (event.getEventType() == MouseEvent.MOUSE_RELEASED){
+                    text.add(new Text(gc,color, lastX,lastY, "lorem ipsum"));
+                    refresh();
+                }
+            }
+        };
+        
         EventHandler<MouseEvent> ovalHandler = new EventHandler<MouseEvent>(){
             double lastX = 0;
             double lastY = 0;
@@ -427,26 +448,7 @@ public class HeronPaint extends Application {
             }
         };
         
-        EventHandler<MouseEvent> noteHandler = new EventHandler<MouseEvent>(){
-            double lastX = 0;
-            double lastY = 0;
-            public void handle(MouseEvent event) {
-                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
-                    gc.setStroke(color);
-                    gc.setFill(color);
-                    gc.setLineWidth(thicc);
-                    lastX = event.getX();
-                    lastY = event.getY();
-                }
-                if (event.getEventType() == MouseEvent.MOUSE_RELEASED){
-                    //get text input through text field
-                    if event.getEventType() == KeyEvent.
-                    String iText = 
-                    shapes.add(new Text(gc,color, lastX,lastY,iText));
-                    refresh();
-                }
-            }
-        };
+        
         
         
         
@@ -479,6 +481,20 @@ public class HeronPaint extends Application {
                 canvas.setOnMouseDragged(noteHandler);
 
                 canvas.setOnMouseReleased(noteHandler);
+
+            }
+        });
+        
+        hideButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                for(Text item:text){
+                    if(item.isHidden()){
+                        item.unhide();
+                    }
+                    else{item.hide();}
+                }
+                
+                refresh();
 
             }
         });
