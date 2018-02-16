@@ -667,6 +667,47 @@ public class HeronPaint extends Application {
             }
         });
 
+        // Select Button
+        EventHandler<MouseEvent> selectHandler = new EventHandler<MouseEvent>()
+        {
+
+            double lastX = 0;
+            double lastY = 0;
+            ArrayList<Shape> selectedS = new ArrayList<Shape>();
+            public void handle(MouseEvent event) {
+                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    lastX = event.getX();
+                    lastY = event.getY();
+                    for (Shape s: shapes) {
+                        if(s.isInHitBox(event.getX(), event.getY())){
+                            selectedS.add(s);
+                        }
+                    }
+                }
+                if (event.getEventType() == MouseEvent.MOUSE_RELEASED) {
+                    double xDiff = event.getX() - lastX;
+                    double yDiff = event.getY() - lastY;
+                    for (Shape sS: selectedS){
+                        sS.move(xDiff, yDiff);
+                        refresh();
+                    }
+                    selectedS = new ArrayList<Shape>();
+                }
+            }
+        };
+
+        selectButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                canvas.setOnMousePressed(selectHandler);
+
+                canvas.setOnMouseDragged(selectHandler);
+
+                canvas.setOnMouseReleased(selectHandler);
+
+            }
+        });
+
         // Setting buttons in bars
         double spacing = 20;
         HBox thiccButtons = new HBox(penSize1,
