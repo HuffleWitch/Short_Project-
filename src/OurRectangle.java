@@ -1,3 +1,4 @@
+package src;
 import javafx.scene.*;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
