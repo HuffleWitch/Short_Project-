@@ -180,28 +180,70 @@ public class HeronPaint extends Application {
         Curse.setImage(CursorIcon);
         Button selectButton = new Button("", Curse);
         selectButton.setTooltip(new Tooltip("Select"));
-        Button lineButton = new Button("LINE");
+        
+        Image lineIcon = new Image("LineIcon.png", 20, 20, true, false);
+        ImageView line = new ImageView();
+        line.setImage(lineIcon);
+        Button lineButton = new Button("", line);
         lineButton.setTooltip(new Tooltip("Line"));
-        Button arcButton = new Button("ARC");
-        arcButton.setTooltip(new Tooltip("Arc"));
-        Button ovalButton = new Button("OVAL");
-        Button rectButton = new Button("RECTANGLE");
+        
+        Image ovalIcon = new Image("OvalIcon.png", 20, 20, true, false);
+        ImageView oval = new ImageView();
+        oval.setImage(ovalIcon);
+        Button ovalButton = new Button("", oval);
+        
+        Image rectIcon = new Image("RectangleIcon.png", 20, 20, true, false);
+        ImageView rect = new ImageView();
+        rect.setImage(rectIcon);
+        Button rectButton = new Button("", rect);
         rectButton.setTooltip(new Tooltip("Rectangle"));
-        Button circButton = new Button("CIRCLE");
+        
+        Image circleIcon = new Image("CircleIcon.png", 20, 20, true, false);
+        ImageView circ = new ImageView();
+        circ.setImage(circleIcon);
+        Button circButton = new Button("", circ);
         circButton.setTooltip(new Tooltip("Circle"));
-        Button polyButton = new Button("POLYGON");
+        
+        Image polyIcon = new Image("PolygonIcon.png", 20, 20, true, false);
+        ImageView poly = new ImageView();
+        poly.setImage(polyIcon);
+        Button polyButton = new Button("", poly);
         polyButton.setTooltip(new Tooltip("Polygon"));
-        Button textButton = new Button("TEXT");
+        
+        Image textIcon = new Image("TextIcon.png", 20, 20, true, false);
+        ImageView text = new ImageView();
+        text.setImage(textIcon);
+        Button textButton = new Button("", text);
         textButton.setTooltip(new Tooltip("Text"));
-        Button noteButton = new Button("NOTE");
+        
+        Image noteIcon = new Image("NoteIcon.png", 20, 20, true, false);
+        ImageView note = new ImageView();
+        note.setImage(noteIcon);
+        Button noteButton = new Button("", note);
         noteButton.setTooltip(new Tooltip("Note"));
-        Button hideButton = new Button("HIDE NOTES");
+        
+        Image hideIcon = new Image("HideIcon.png", 20, 20, true, false);
+        ImageView hide = new ImageView();
+        hide.setImage(hideIcon);
+        Button hideButton = new Button("", hide);
         hideButton.setTooltip(new Tooltip("Hide Notes"));
-        Button importButton = new Button("IMPORT");
+        
+        Image importIcon = new Image("ImportIcon.png", 20, 20, true, false);
+        ImageView imp = new ImageView();
+        imp.setImage(importIcon);
+        Button importButton = new Button("", imp);
         importButton.setTooltip(new Tooltip("Import"));
-        Button saveButton = new Button("SAVE");
+        
+        Image saveIcon = new Image("SaveIcon.png", 20, 20, true, false);
+        ImageView save = new ImageView();
+        save.setImage(saveIcon);
+        Button saveButton = new Button("", save);
         saveButton.setTooltip(new Tooltip("Save"));
-        Button loadButton = new Button("LOAD");
+        
+        Image loadIcon = new Image("LoadIcon.png", 20, 20, true, false);
+        ImageView load = new ImageView();
+        load.setImage(loadIcon);
+        Button loadButton = new Button("", load);
         loadButton.setTooltip(new Tooltip("Load"));
 
         Image printicon = new Image("PrinterIcon.png", 20, 20, true, false);
@@ -209,7 +251,11 @@ public class HeronPaint extends Application {
         img.setImage(printicon);
         Button printButton = new Button("", img);
         printButton.setTooltip(new Tooltip("Print"));
-        Button exportButton = new Button("EXPORT");
+        
+        Image exportIcon = new Image("ExportIcon.png", 20, 20, true, false);
+        ImageView exp = new ImageView();
+        exp.setImage(exportIcon);
+        Button exportButton = new Button("", exp);
         exportButton.setTooltip(new Tooltip("Export"));
 
         EventHandler<MouseEvent> penHandler = new EventHandler<MouseEvent>() {

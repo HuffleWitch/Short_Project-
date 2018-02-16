@@ -69,8 +69,8 @@ public class Loader
 
         System.out.println(output);
 
-        //output[0]=shapes;
-        //output[1]=text;
+        output[0]=shapes;
+        output[1]=text;
         return output;
 
     }
