@@ -11,9 +11,22 @@ dependency3.type=UsesDependency
 dependency4.from=Loader
 dependency4.to=Shape
 dependency4.type=UsesDependency
+<<<<<<< HEAD
+=======
+dependency5.from=Loader
+dependency5.to=Shape
+dependency5.type=UsesDependency
+dependency6.from=HeronPaint
+dependency6.to=OurRectangle
+dependency6.type=UsesDependency
+dependency7.from=HeronPaint
+dependency7.to=Scribble
+dependency7.type=UsesDependency
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
 objectbench.height=76
 objectbench.width=1072
 package.editor.height=400
+<<<<<<< HEAD
 package.editor.width=974
 package.editor.x=12
 package.editor.y=12
@@ -25,12 +38,21 @@ target1.editor.height=744
 target1.editor.width=1382
 target1.editor.x=-8
 target1.editor.y=-8
+=======
+package.editor.width=560
+package.editor.x=510
+package.editor.y=116
+package.numDependencies=7
+package.numTargets=8
+package.showExtends=true
+package.showUses=true
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
 target1.height=50
-target1.name=HeronPaint
-target1.naviview.expanded=true
+target1.name=Line
 target1.showInterface=false
 target1.type=ClassTarget
 target1.typeParameters=
+<<<<<<< HEAD
 target1.width=90
 target1.x=460
 target1.y=220
@@ -75,23 +97,60 @@ target3.editor.y=-8
 target3.height=50
 target3.name=Shape
 target3.naviview.expanded=false
+=======
+target1.width=80
+target1.x=190
+target1.y=130
+target2.editor.height=700
+target2.editor.width=900
+target2.editor.x=0
+target2.editor.y=0
+target2.height=50
+target2.name=OurRectangle
+target2.showInterface=false
+target2.type=ClassTarget
+target2.typeParameters=
+target2.width=100
+target2.x=10
+target2.y=190
+target3.editor.height=699
+target3.editor.width=900
+target3.editor.x=417
+target3.editor.y=22
+target3.height=50
+target3.name=HeronPaint
+target3.naviview.expanded=true
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
 target3.showInterface=false
 target3.type=InterfaceTarget
 target3.typeParameters=
+<<<<<<< HEAD
 target3.width=80
+=======
+target3.width=90
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
 target3.x=160
 target3.y=10
 target4.editor.height=700
 target4.editor.width=900
+<<<<<<< HEAD
 target4.editor.x=52
 target4.editor.y=32
 target4.height=50
 target4.name=Scribble
 target4.naviview.expanded=false
+=======
+target4.editor.x=146
+target4.editor.y=6
+target4.height=50
+target4.name=Shape
+target4.naviview.expanded=true
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
 target4.showInterface=false
-target4.type=ClassTarget
+target4.type=InterfaceTarget
 target4.typeParameters=
 target4.width=80
+<<<<<<< HEAD
 target4.x=660
 target4.y=120
 target5.editor.height=744
@@ -101,10 +160,21 @@ target5.editor.y=-8
 target5.height=50
 target5.name=Loader
 target5.naviview.expanded=true
+=======
+target4.x=160
+target4.y=70
+target5.editor.height=700
+target5.editor.width=900
+target5.editor.x=0
+target5.editor.y=0
+target5.height=50
+target5.name=Scribble
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
 target5.showInterface=false
 target5.type=ClassTarget
 target5.typeParameters=
 target5.width=80
+<<<<<<< HEAD
 target5.x=10
 target5.y=90
 target6.editor.height=735
@@ -113,11 +183,22 @@ target6.editor.x=-7
 target6.editor.y=0
 target6.height=50
 target6.name=Saver
+=======
+target5.x=120
+target5.y=190
+target6.editor.height=700
+target6.editor.width=900
+target6.editor.x=473
+target6.editor.y=9
+target6.height=50
+target6.name=Loader
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
 target6.naviview.expanded=true
 target6.showInterface=false
 target6.type=ClassTarget
 target6.typeParameters=
 target6.width=80
+<<<<<<< HEAD
 target6.x=100
 target6.y=130
 target7.editor.height=700
@@ -127,10 +208,22 @@ target7.editor.y=32
 target7.height=50
 target7.name=Text
 target7.naviview.expanded=false
+=======
+target6.x=10
+target6.y=90
+target7.editor.height=735
+target7.editor.width=1378
+target7.editor.x=-7
+target7.editor.y=0
+target7.height=50
+target7.name=Saver
+target7.naviview.expanded=true
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
 target7.showInterface=false
 target7.type=ClassTarget
 target7.typeParameters=
 target7.width=80
+<<<<<<< HEAD
 target7.x=190
 target7.y=250
 target8.editor.height=700
@@ -140,10 +233,17 @@ target8.editor.y=32
 target8.height=50
 target8.name=Line
 target8.naviview.expanded=false
+=======
+target7.x=100
+target7.y=130
+target8.height=50
+target8.name=Polygon
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
 target8.showInterface=false
 target8.type=ClassTarget
 target8.typeParameters=
 target8.width=80
+<<<<<<< HEAD
 target8.x=330
 target8.y=290
 target9.height=50
@@ -154,3 +254,7 @@ target9.typeParameters=
 target9.width=100
 target9.x=10
 target9.y=190
+=======
+target8.x=10
+target8.y=250
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
