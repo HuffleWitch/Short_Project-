@@ -47,10 +47,25 @@ public class Oval implements Shape {
     }
 
     public boolean isInHitBox(double isX, double isY) {
-        return false;
+        if (isCircle) {
+            double w=x2-x1;
+            double centerX = x1 + w/2;
+            double centerY = y1 + w/2;
+            double dx = isX - centerX;
+            double dy = isY - centerY;
+            double dist = java.lang.Math.sqrt((dx*dx)+(dy*dy));
+            return (dist < w/2);
+        } else{
+            boolean betweenX = (x1 < isX && isX < x2);
+            boolean betweenY = (y1 < isY && isY < y2);
+            return (betweenX && betweenY);
+        }
     }
     public void move(double deltaX, double deltaY){
-        
+        x1 += deltaX;
+        x2 += deltaX;
+        y1 += deltaY;
+        y2 += deltaY;
     }
 
 }
