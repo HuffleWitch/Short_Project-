@@ -1,3 +1,5 @@
+package src;
+
 //text
 import javafx.scene.*;
 import javafx.scene.paint.*;

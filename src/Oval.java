@@ -1,3 +1,4 @@
+package src;
 import javafx.scene.*;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
@@ -9,15 +10,21 @@ public class Oval implements Shape {
     private GraphicsContext gc;
     private Color color;
     private double thicc;
-    private ArrayList<Pair<Double,Double>> points;
+    private double x2;
+    private double x1;
+    private double y1;
+    private double y2;
     private boolean isCircle;
 
-    public Oval(GraphicsContext gcon, Color c, double t, ArrayList<Pair<Double,Double>> ps, boolean ic) {
+    public Oval(GraphicsContext gcon, Color c, double t, double xC1, double xC2, double yC1, double yC2, boolean ic) {
         gc = gcon;
         color = c;
         thicc = t;
-        points = ps;
         isCircle=ic;
+        x1=xC1;
+        x2=xC2;
+        y1=yC1;
+        y2=yC2;
     }
 
     public void draw() {
@@ -25,25 +32,13 @@ public class Oval implements Shape {
         gc.setStroke(color);
         gc.setFill(color);
         gc.setLineWidth(thicc);
-        //starting point
-        double x1 = points.get(0).getKey();
-        double y1 = points.get(0).getValue();
-        double x2 = points.get(0).getValue();
-        double y2 = points.get(0).getValue();
-        //let user drag to get width and height
-        for (int i = 1; i < points.size(); i++) {
-            x2 = points.get(i).getKey();
-            y2 = points.get(i).getValue();
-            x1 = x2;
-            y1 = y2;
-        }
         //calculate width and height
         double h=y2-y1;
         double w=x2-x1;
 
         //draw
         if (isCircle){
-            gc.strokeOval(x1,y1,(w+h)/2,(w+h)/2);
+            gc.strokeOval(x1,y1,w,w);
         }
         else{
             gc.strokeOval(x1,y1,w,h);

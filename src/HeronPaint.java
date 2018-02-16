@@ -43,6 +43,7 @@ public class HeronPaint extends Application {
 
     // List of Shapes to draw
     private ArrayList<Shape> shapes = new ArrayList<Shape>();
+    private ArrayList<Shape> text = new ArrayList<Shape>();
 
     final Canvas canvas = new Canvas(width, height);
     GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -146,7 +147,7 @@ public class HeronPaint extends Application {
         Button eraseButton = new Button("ERASE");
         Button selectButton = new Button("SELECT");
         Button lineButton = new Button("LINE");
-        Button arcButton = new Button("ARC");
+        Button ovalButton = new Button("OVAL");
         Button rectButton = new Button("RECTANGLE");
         Button circButton = new Button("CIRCLE");
         Button polyButton = new Button("POLYGON");
@@ -388,6 +389,100 @@ public class HeronPaint extends Application {
             }
         };
 
+        EventHandler<MouseEvent> circHandler = new EventHandler<MouseEvent>(){
+            double lastX = 0;
+            double lastY = 0;
+            public void handle(MouseEvent event) {
+                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    gc.setStroke(color);
+                    gc.setFill(color);
+                    gc.setLineWidth(thicc);
+                    lastX = event.getX();
+                    lastY = event.getY();
+                }
+                if (event.getEventType() == MouseEvent.MOUSE_RELEASED){
+                    shapes.add(new Oval(gc,color,thicc, lastX, event.getX(), lastY, event.getY(), true));
+                    refresh();
+                    
+                }
+            }
+        };
+        
+        EventHandler<MouseEvent> ovalHandler = new EventHandler<MouseEvent>(){
+            double lastX = 0;
+            double lastY = 0;
+            public void handle(MouseEvent event) {
+                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    gc.setStroke(color);
+                    gc.setFill(color);
+                    gc.setLineWidth(thicc);
+                    lastX = event.getX();
+                    lastY = event.getY();
+                }
+                if (event.getEventType() == MouseEvent.MOUSE_RELEASED){
+                    shapes.add(new Oval(gc,color,thicc, lastX, event.getX(), lastY, event.getY(), false));
+                    refresh();
+                    
+                }
+            }
+        };
+        
+        EventHandler<MouseEvent> noteHandler = new EventHandler<MouseEvent>(){
+            double lastX = 0;
+            double lastY = 0;
+            public void handle(MouseEvent event) {
+                if (event.getEventType() == MouseEvent.MOUSE_PRESSED) {
+                    gc.setStroke(color);
+                    gc.setFill(color);
+                    gc.setLineWidth(thicc);
+                    lastX = event.getX();
+                    lastY = event.getY();
+                }
+                if (event.getEventType() == MouseEvent.MOUSE_RELEASED){
+                    //get text input through text field
+                    if event.getEventType() == KeyEvent.
+                    String iText = 
+                    shapes.add(new Text(gc,color, lastX,lastY,iText));
+                    refresh();
+                }
+            }
+        };
+        
+        
+        
+        
+        circButton.setOnAction(new EventHandler<ActionEvent>(){
+            public void handle(ActionEvent event){
+                canvas.setOnMousePressed(circHandler);
+
+                canvas.setOnMouseDragged(circHandler);
+
+                canvas.setOnMouseReleased(circHandler);
+            }
+        });
+        
+        ovalButton.setOnAction(new EventHandler<ActionEvent>(){
+            public void handle(ActionEvent event){
+                canvas.setOnMousePressed(ovalHandler);
+
+                canvas.setOnMouseDragged(ovalHandler);
+
+                canvas.setOnMouseReleased(ovalHandler);
+            }
+        });
+        
+        noteButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                canvas.setOnMousePressed(noteHandler);
+
+                canvas.setOnMouseDragged(noteHandler);
+
+                canvas.setOnMouseReleased(noteHandler);
+
+            }
+        });
+        
         rectButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
 
@@ -433,7 +528,7 @@ public class HeronPaint extends Application {
                                         greenButton,
                                         purpleButton,
                                         eraseButton,
-                                        arcButton,
+                                        ovalButton,
                                         rectButton,
                                         circButton,
                                         noteButton,
