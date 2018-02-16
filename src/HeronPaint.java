@@ -498,7 +498,8 @@ public class HeronPaint extends Application {
                 }
             }
         };
-    };
+
+
         
         
         
@@ -543,6 +544,18 @@ public class HeronPaint extends Application {
                 canvas.setOnMouseDragged(rectHandler);
 
                 canvas.setOnMouseReleased(rectHandler);
+
+            }
+        });
+        
+        importButton.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                canvas.setOnMousePressed(importHandler);
+
+                canvas.setOnMouseDragged(importHandler);
+
+                canvas.setOnMouseReleased(importHandler);
 
             }
         });

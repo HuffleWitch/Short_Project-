@@ -36,9 +36,31 @@ comment23.target=void\ handle(javafx.event.ActionEvent)
 comment24.params=event
 comment24.target=void\ handle(javafx.scene.input.MouseEvent)
 comment25.params=event
+<<<<<<< HEAD
+comment25.target=void\ handle(javafx.scene.input.MouseEvent)
+comment26.params=event
+comment26.target=void\ handle(javafx.scene.input.MouseEvent)
+comment27.params=event
+comment27.target=void\ handle(javafx.scene.input.MouseEvent)
+comment28.params=event
+comment28.target=void\ handle(javafx.scene.input.MouseEvent)
+comment29.params=event
+comment29.target=void\ handle(javafx.event.ActionEvent)
+=======
 comment25.target=void\ handle(javafx.event.ActionEvent)
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
 comment3.params=event
 comment3.target=void\ handle(javafx.event.ActionEvent)
+comment30.params=event
+comment30.target=void\ handle(javafx.event.ActionEvent)
+comment31.params=event
+comment31.target=void\ handle(javafx.event.ActionEvent)
+comment32.params=event
+comment32.target=void\ handle(javafx.event.ActionEvent)
+comment33.params=event
+comment33.target=void\ handle(javafx.event.ActionEvent)
+comment34.params=event
+comment34.target=void\ handle(javafx.event.ActionEvent)
 comment4.params=event
 comment4.target=void\ handle(javafx.event.ActionEvent)
 comment5.params=event
@@ -51,4 +73,8 @@ comment8.params=event
 comment8.target=void\ handle(javafx.event.ActionEvent)
 comment9.params=event
 comment9.target=void\ handle(javafx.event.ActionEvent)
+<<<<<<< HEAD
+numComments=35
+=======
 numComments=26
+>>>>>>> 8b1597ff7293bd16bb2977679833d8eaa448d610
