@@ -36,7 +36,7 @@ public class Line implements Shape
         double m = (mathy1 - mathy2)/(x1-x2);
         double b = mathy1 - (m * x1);
         double result = (m*isX) + b;
-        System.out.println(isX+" "+ isY+" "+ m+" "+ b+" "+ result);
+        //System.out.println(isX+" "+ isY+" "+ m+" "+ b+" "+ result);
         return (result - 10 < -isY && -isY < result+10 );
     }
     public void move(double deltaX, double deltaY) {
