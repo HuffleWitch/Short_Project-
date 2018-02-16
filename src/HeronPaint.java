@@ -1,4 +1,4 @@
-package src;
+ 
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -72,7 +72,7 @@ public class HeronPaint extends Application {
         Scene s = new Scene(root, width, height);//, Color.WHITE);
 
 
-        
+
 
         // All the color buttons
         Button whiteButton = new Button("", new Rectangle(20, 20, Color.WHITE));
@@ -91,8 +91,8 @@ public class HeronPaint extends Application {
         greenButton.setTooltip(new Tooltip("Slate Blue"));
         Button purpleButton = new Button("", new Rectangle(20, 20, Color.DARKORCHID));
         purpleButton.setTooltip(new Tooltip("Dark Orchid"));
-        
-        
+
+
 
         whiteButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -159,7 +159,7 @@ public class HeronPaint extends Application {
             }
         });
         //Button Images
-        
+
 
         // All the other buttons
 
@@ -168,7 +168,7 @@ public class HeronPaint extends Application {
         penImg.setImage(penIcon);
         Button penButton = new Button("", penImg);
         penButton.setTooltip(new Tooltip("Pen"));
-        
+
         Image eraserIcon = new Image("EraserIcon.png", 20, 20, true, false);
         ImageView eraser = new ImageView();
         eraser.setImage(eraserIcon);
@@ -501,11 +501,11 @@ public class HeronPaint extends Application {
                 if (event.getEventType() == MouseEvent.MOUSE_RELEASED){
                     shapes.add(new Oval(gc,color,thicc, lastX, event.getX(), lastY, event.getY(), true));
                     refresh();
-                    
+
                 }
             }
         };
-        
+
         EventHandler<MouseEvent> ovalHandler = new EventHandler<MouseEvent>(){
             double lastX = 0;
             double lastY = 0;
@@ -520,11 +520,11 @@ public class HeronPaint extends Application {
                 if (event.getEventType() == MouseEvent.MOUSE_RELEASED){
                     shapes.add(new Oval(gc,color,thicc, lastX, event.getX(), lastY, event.getY(), false));
                     refresh();
-                    
+
                 }
             }
         };
-        
+
         EventHandler<MouseEvent> noteHandler = new EventHandler<MouseEvent>(){
             double lastX = 0;
             double lastY = 0;
@@ -538,17 +538,17 @@ public class HeronPaint extends Application {
                 }
                 if (event.getEventType() == MouseEvent.MOUSE_RELEASED){
                     //get text input through text field
-                    if (event.getEventType() == KeyEvent().String ){iText = 
-                    shapes.add(new Text(gc,color, lastX,lastY,iText));
+                    String iText = "Placeholder";
+                    text.add(new Text(gc,color, lastX,lastY,iText));
                     refresh();
                 }
             }
         };
 
 
-        
-        
-        
+
+
+
         circButton.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent event){
                 canvas.setOnMousePressed(circHandler);
@@ -557,9 +557,9 @@ public class HeronPaint extends Application {
 
                 canvas.setOnMouseReleased(circHandler);
             }
-        
+
         });
-        
+
         ovalButton.setOnAction(new EventHandler<ActionEvent>(){
             public void handle(ActionEvent event){
                 canvas.setOnMousePressed(ovalHandler);
@@ -569,7 +569,7 @@ public class HeronPaint extends Application {
                 canvas.setOnMouseReleased(ovalHandler);
             }
         });
-        
+
         noteButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
 
@@ -581,7 +581,7 @@ public class HeronPaint extends Application {
 
             }
         });
-        
+
         rectButton.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
 
@@ -593,18 +593,7 @@ public class HeronPaint extends Application {
 
             }
         });
-        
-        importButton.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
 
-                canvas.setOnMousePressed(importHandler);
-
-                canvas.setOnMouseDragged(importHandler);
-
-                canvas.setOnMouseReleased(importHandler);
-
-            }
-        });
 
         // Setting buttons in bars
         double spacing = 20;
